@@ -54,6 +54,11 @@ exec --no-startup-id pulseaudio
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
+bindsym $mod+Ctrl+s exec $(pkexec /usr/bin/brillo -S 50)
+bindsym XF86MonBrightnessUp exec $(pkexec /usr/bin/brillo -A 5)
+bindsym XF86MonBrightnessDown exec $(pkexec /usr/bin/brillo -U 5)
+
+
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec firefox
@@ -149,6 +154,7 @@ set $ws5 5
 set $ws6 6
 set $ws7 7
 set $ws8 8
+set $ws9 9
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -159,6 +165,7 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -169,6 +176,7 @@ bindsym $mod+Ctrl+5 move container to workspace $ws5
 bindsym $mod+Ctrl+6 move container to workspace $ws6
 bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
@@ -179,6 +187,7 @@ bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws1
@@ -271,7 +280,7 @@ mode "resize" {
 
 # Lock screen
 # bindsym $mod+0 exec --no-startup-id blurlock
-bindsym $mod+0 exec --no-startup-id i3lockmore --no-unlock-indicator --image-fill ~/Imágenes/LockScreen.jpg
+bindsym $mod+Shift+0 exec --no-startup-id i3lockmore --no-unlock-indicator --image-fill ~/Imágenes/LockScreen.jpg
 
 # Turn off screen after 10 minutes in blurlock mode
 # exec --no-startup-id xautolock -time 10 -locker blurlock
@@ -369,7 +378,7 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 14
+gaps inner 5
 gaps outer -2
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
@@ -423,7 +432,7 @@ mode "$mode_gaps_outer" {
 
 # Add static wallpaper
 # exec --no-startup-id feh --bg-scale ~/Imágenes/WallPaper.png
-exec --no-startup-id nitrogen --set-scaled ~/Imágenes/WallPaper.png
+exec --no-startup-id nitrogen --set-scaled ~/Imágenes/WallPaper.jpg
 
 # Floating Window for Java Swing
 # for_window [instance="sun-awt-X11-XFramePeer"] floating enable
@@ -432,3 +441,7 @@ for_window [instance="sun-awt-X11-XFramePeer"] floating disable
 # Battery Level Warning with i3-battery-popup gitHub repo installed
 exec --no-startup-id i3-battery-popup
 for_window [title="Battery Warning"] sticky enable
+exec xfce4-power-manager # Es una guarrada pero estoy hasta los huevos de quedarme sin bateria y no darme cuenta :3 y que se me apague el portatil en la cara cuando estoy usando full screen.
+
+# My lovely google calendar ^_^
+exec --no-startup-id firefox "https://calendar.google.com/calendar/b/3/r"
